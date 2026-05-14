@@ -32,12 +32,24 @@ npm run build   # dist/ に本番ビルドを出力
 npm run lint    # ESLint チェック＆自動修正
 ```
 
-バックエンドAPI（`https://artifact-simulator-docker.onrender.com/`）が別途稼働している必要があります。
-ローカルで動かす場合は `src/scripts/api.js` のURLを `http://localhost:13389/` に変更してください。
+バックエンドAPIは `/api/` にリクエストします。
+ローカル開発時は Vue dev server が `http://localhost:5000` のバックエンドへプロキシします。
+
+## k3s デプロイ
+
+フロントエンドは nginx で静的ファイルを配信し、`/api/` を k3s 内部の `artifact-backend` Service へプロキシします。
+バックエンドAPIを外部公開する必要はありません。
+
+```bash
+docker build -t artifact-simulator-frontend:latest .
+kubectl apply -f artifact-simulator-frontend.yaml
+```
+
+Cloudflare Tunnel は `artifact-simulator-frontend` の Ingress に向けます。
 
 ## 技術スタック
 
 - **フロントエンド**: Vue 3 (Options API) + Vue CLI 5
 - **HTTP クライアント**: Axios
-- **デプロイ**: Vercel
-- **バックエンド**: Docker コンテナ (Render にデプロイ)
+- **デプロイ**: Docker + k3s
+- **バックエンド**: k3s 内部 Service
