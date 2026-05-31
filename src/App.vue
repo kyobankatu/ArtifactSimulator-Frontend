@@ -128,7 +128,7 @@ export default {
       show_close_button:   false,               // infoボックスの閉じるボタンの表示フラグ
 
       // --- モード関連 ---
-      activeMode:          "old",              // 表示中のモード ('old' or 'new')
+      activeMode:          "new",              // 表示中のモード ('old' or 'new')
 
       // --- ロード・スキャン関連 ---
       loading:             false,               // ロード状態フラグ

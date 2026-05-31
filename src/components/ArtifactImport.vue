@@ -9,7 +9,7 @@
   <div class="img-upload-area">
     <!-- ファイル選択を隠してラベルをクリック可能にする -->
     <label for="artifact-select" class="def-button artifact-import-label">ファイルを選択</label>
-    <input type="file" id="artifact-select" @change="$emit('file-change', $event)" accept="image/png"/>
+    <input type="file" id="artifact-select" @change="$emit('file-change', $event)" accept="image/png,image/jpeg,image/webp"/>
     <input type="text" :value="fileName" class="artifact-img-name" readonly placeholder="ファイル名" />
     <button class="def-button artifact-import-scan" @click="$emit('scan-image')">スキャン</button>
   </div>
